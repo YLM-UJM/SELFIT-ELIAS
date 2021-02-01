@@ -1,0 +1,67 @@
+.card-tps{
+    display: inline-block;
+    margin:5px;
+    border-radius: 14px;
+
+  }
+
+  .card-tps:hover{
+    //cursor: grab;
+    background-color: rgba(255,165,0,0.5) !important;
+    color: white !important;
+  }
+
+  #label-temps:hover{
+    //cursor: grab;
+    //background-color: rgba(255,165,0,0.5) !important;
+    color: white !important;
+  }
+  
+  .selected{
+    background-color: orange;
+    color: white !important;
+  }
+
+  #label-temps{
+    //background-color: orange;
+    border: orange 1px solid;
+    /* border-radius: 14px; */
+    /* padding: 14px; */
+    height: 28px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 14px;
+    color: orange;
+  }
+
+  .color{
+    --background: #54d61c;
+}
+
+ion-card:before{
+    background-color:white;
+}
+
+ion-card{
+    margin:0;
+}
+
+
+.titre-choix{
+    display:block;
+    text-align: center;
+}
+
+.selected_type{
+    background-color: orange;
+    color:white;
+}
+
+ion-button{
+    width:40%;
+    margin-left:5%;
+    bottom:15px;
+    position:fixed;
+    white-space: normal !important;
+    color:white;
+
+}

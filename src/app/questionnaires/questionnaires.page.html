@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Questionnaires</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <div (click)="goToSF12()" class="image-box" style="--image-url:url('assets/qualitedevie.jpg')">
+      <h1 style='text-align:center'>Qualité de vie <br/> <h6 style='text-align:center; font-style:italic'>  </h6></h1>
+
+      <!-- SOMMEIL -->
+    </div>
+    <div (click)="goToFACIT()" class="image-box" style="--image-url:url('assets/fatigue.jpg')">
+      <h1 style='text-align:center'>Fatigue<br/> <h6 style='text-align:center; font-style:italic'></h6></h1>
+      <!-- SF36 -->
+    </div>
+
+    <div (click)="goToWEMWBS()" class="image-box" style="--image-url:url('assets/bienetre.jpeg')">
+      <h1 style='text-align:center'>Bien-être <br/> <h6 style='text-align:center; font-style:italic'></h6></h1>
+      <!-- SF36 -->
+    </div>
+
+    <div (click)="goToCESD()" class="image-box" style="--image-url:url('assets/depression.jpeg')">
+      <h1 style='text-align:center'>Depression<br/> <h6 style='text-align:center; font-style:italic'></h6></h1>
+      <!-- SF36 -->
+    </div>
+
+    <div (click)="goToISI()" class="image-box" style="--image-url:url('assets/sommeil.jpg')">
+      <h1 style='text-align:center'>Sommeil<br/> <h6 style='text-align:center; font-style:italic'></h6></h1>
+      <!-- SF36 -->
+    </div>
+
+    <div (click)="goToBPI()" class="image-box" style="--image-url:url('assets/douleurs.jpg')">
+      <h1 style='text-align:center'>Douleurs<br/> <h6 style='text-align:center; font-style:italic'></h6></h1>
+      <!-- SF36 -->
+    </div>
+
+  </ion-list>
+
+</ion-content>

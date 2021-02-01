@@ -1,0 +1,316 @@
+<ion-header>
+  <!-- <ion-toolbar>
+    <ion-title>info-bloc</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="_dismiss()">
+        <ion-icon solot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> -->
+  <ion-toolbar>
+
+
+  <ion-row>
+    <ion-col size="1">
+
+    </ion-col>
+    <ion-col size="2">
+      <ion-row><h6>Force</h6></ion-row>
+      <ion-row><h6>Endurance</h6></ion-row>
+      <ion-row><h6>Equilibre</h6></ion-row>
+    </ion-col>
+    <ion-col size="5">
+      <ion-row id="bar" [style.width]="bloc.score_force + '%' " style="background-color:rgb(213, 224, 48); color:transparent ">force</ion-row>
+      <ion-row id="bar" [style.width]="bloc.score_endurance + '%' " style="background-color:rgb(86, 86, 170); color:transparent">endurance</ion-row>
+      <ion-row id="bar" [style.width]="bloc.score_agilite + '%' " style="background-color:rgb(160, 121, 127); color:transparent">equilibre</ion-row>
+    </ion-col>
+    <ion-col  size="4">
+
+        <ion-row class="center"> 
+          <b>{{bloc.score}}</b>
+        </ion-row>
+        <ion-row class="center">
+          <b>POINTS</b>
+        </ion-row>
+
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row style="margin-top:5px;" *ngIf="bloc.nb_tour > 1" class='center'>
+    Réaliser {{bloc.nb_tour}} tours du circuit suivant.
+  </ion-row> -->
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item style="margin-top:5px;font-weight: bold;" *ngIf="bloc.nb_tour > 1" class='center' lines="none">
+    <ion-label>
+      Réaliser {{bloc.nb_tour}} tours du circuit suivant.
+    </ion-label>
+  </ion-item>
+
+
+  <div *ngFor="let c of bloc.contents; let i = index">
+
+    <!-- TYPE REPET DONC 1 SEULE LIGNE -->
+    <ng-container *ngIf="c.genre =='REPET' ">
+      <ion-card> 
+            <!-- PART A -->
+            <ion-row>
+              <div id="center-div" [ngClass]="{'exercice': c.part_a.type === 'exercice', 'recup':c.part_a.type === 'récupération' }">
+                {{c.part_a.type}}
+              </div>
+            </ion-row>
+            <ion-row>
+              <!-- PHOTO -->
+              <ion-col *ngIf="c.part_a.image != null" size="5">
+                <div *ngIf='c.part_a.unique_id < 71'>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_MARIE/' + c.part_a.nom_fichier)" class="card-img" *ngIf="c.part_a.nom_fichier.includes('Marie')"  src="assets/GIFS_MARIE/{{c.part_a.nom_fichier}}" ></ion-img>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_SEV/' + c.part_a.nom_fichier)" class="card-img" *ngIf="c.part_a.nom_fichier.includes('Sev')"  src="assets/GIFS_SEV/{{c.part_a.nom_fichier}}" ></ion-img>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_ANDRE/' + c.part_a.nom_fichier)" class="card-img" *ngIf="c.part_a.nom_fichier.includes('Andre')"  src="assets/GIFS_ANDRE/{{c.part_a.nom_fichier}}"  ></ion-img>
+                </div>
+                <img (click)="zoomPhoto('assets/course.jpg')" *ngIf="c.part_a.nom_exo == 'course'"  id="imageGIF" src="assets/course.jpg" alt="" />
+                <img (click)="zoomPhoto(c.part_a.image)" *ngIf='c.part_a.image' [src]="domSanitizer.bypassSecurityTrustUrl(c.part_a.image)" alt="" />
+  
+                <!-- <ion-img
+                role="button"
+                class="card-img"
+                src="assets/exo/photo_carre.png"
+                (click)="zoomPhoto('assets/exo/photo_carre.png')">
+                </ion-img> -->
+              </ion-col>
+              <!-- NOM EXO -->
+              <ion-col  *ngIf="c.part_a.type === 'exercice'" size="4">
+                <ion-row class="center-externe">
+                  <div class="center-interne" >
+                    {{c.part_a.nom_exo}}
+                  </div>
+                </ion-row>
+
+
+              </ion-col>          
+              <!-- DUREE OU NB REP OU DISTANCE -->
+              <ion-col class="center" [size]="c.part_a.type === 'exercice' ? 3 : 12"  >
+                <ion-row class="center-externe">
+                  <div class="center-interne" >
+                    {{c.part_a.temps_formatted}}
+                  </div>
+                </ion-row>
+
+              </ion-col> 
+  
+            </ion-row>
+       <!-- <ion-card-header *ngIf="c.part_a.type == 'exercice'" style="background-color:rgb(55, 124, 228)" class="ion-text-center">
+         <ion-card-subtitle>{{c.part_a.type}}</ion-card-subtitle>
+       </ion-card-header>
+ 
+
+       <ion-card-header *ngIf="c.part_a.type == 'récupération'" style="background-color:#ed5565" class="ion-text-center">
+         <ion-card-subtitle>{{c.part_a.type}}</ion-card-subtitle>
+       </ion-card-header>
+ 
+       <ion-card-content>
+ 
+         <img  id="imageGIF" src="assets/exo/photo_carre.png" alt="" />
+         
+         <ion-row>
+           <ion-col class="center" size="6">
+             <h1>{{c.part_a.nom_exo}}</h1>
+           </ion-col>
+           <ion-col *ngIf="c.part_a.nb_rep != '0'" class="center" size="6">
+             <h1>{{c.part_a.nb_rep}} répétitions</h1> 
+           </ion-col>
+           <ion-col *ngIf="c.temps_formatted != '0'" class="center" size="6">
+             <h1>{{c.part_a.temps_formatted}}</h1> 
+           </ion-col>
+         </ion-row>
+ 
+ 
+       </ion-card-content> -->
+     </ion-card>
+
+    </ng-container>
+
+
+        <!-- TYPE SERIE DONC 2 LIGNES -->
+    <ng-container *ngIf="c.genre == 'SERIE' ">
+
+      <ion-card  *ngIf="c.part_a">
+        <ion-row class="ion-text-center">
+
+          <ion-col class="ion-text-center"  size="3">
+                      <!-- NUMERO DE LA PARTIE -->
+            <ion-row style="height:45%">
+              <div id="center-div" >
+                <ion-badge id="badge-etape">
+                  Etape {{i+1}}
+                </ion-badge>
+              </div>
+            </ion-row>
+
+            <ion-row>
+          <!-- NOMBRE DE TOURS -->
+            <ion-badge id="badge-nb_serie">
+              {{c.nb_serie}}X
+            </ion-badge>
+            </ion-row>
+          </ion-col>
+           <!-- PART A et PART B -->
+          <ion-col size="9">
+            <!-- PART A -->
+            <ion-row>
+              <div id="center-div" [ngClass]="{'exercice': c.part_a.type === 'exercice', 'recup':c.part_a.type === 'récupération' }">
+                {{c.part_a.type}}
+              </div>
+            </ion-row>
+            <ion-row>
+              <!-- PHOTO -->
+              <ion-col size="5">
+                <div *ngIf='c.part_a.unique_id < 71'>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_MARIE/' + c.part_a.nom_fichier)" class="card-img" *ngIf="c.part_a.nom_fichier.includes('Marie')"  src="assets/GIFS_MARIE/{{c.part_a.nom_fichier}}" ></ion-img>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_SEV/' + c.part_a.nom_fichier)" class="card-img" *ngIf="c.part_a.nom_fichier.includes('Sev')"  src="assets/GIFS_SEV/{{c.part_a.nom_fichier}}" ></ion-img>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_ANDRE/' + c.part_a.nom_fichier)" class="card-img" *ngIf="c.part_a.nom_fichier.includes('Andre')"  src="assets/GIFS_ANDRE/{{c.part_a.nom_fichier}}"  ></ion-img>
+                </div>
+                <img (click)="zoomPhoto('assets/course.jpg')" *ngIf="c.part_a.nom_exo == 'course'"  id="imageGIF" src="assets/course.jpg" alt="" />
+                <img (click)="zoomPhoto(c.part_a.image)" *ngIf='c.part_a.image' [src]="domSanitizer.bypassSecurityTrustUrl(c.part_a.image)" alt="" />
+
+                <!-- <ion-img
+                role="button"
+                class="card-img"
+                src="assets/exo/photo_carre.png"
+                (click)="zoomPhoto('assets/exo/photo_carre.png')">
+                </ion-img> -->
+              </ion-col>
+              <!-- NOM EXO -->
+              <ion-col *ngIf="c.part_a.type === 'exercice'" id="vertical-align"  size="4">
+                {{c.part_a.nom_exo}}
+              </ion-col>          
+              <!-- DUREE OU NB REP OU DISTANCE -->
+              <ion-col id="vertical-align"  size="3">
+                {{c.part_a.temps_formatted}}
+              </ion-col> 
+
+            </ion-row>
+
+            <!-- PART B  -->
+            <ion-row class='ion-text-center'>
+              <div id="center-div" [ngClass]="{'exercice': c.part_b.type === 'exercice', 'recup':c.part_b.type === 'récupération' }">
+                {{c.part_b.type}}
+              </div>
+            </ion-row>
+            <ion-row>
+              <!-- PHOTO -->
+              <ion-col [size]="c.part_b.image === null ? 0 : 5" size="5">
+                <div *ngIf='c.part_b.unique_id < 71'>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_MARIE/' + c.part_b.nom_fichier)" class="card-img" *ngIf="c.part_b.nom_fichier.includes('Marie')"  src="assets/GIFS_MARIE/{{c.part_b.nom_fichier}}" ></ion-img>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_SEV/' + c.part_b.nom_fichier)" class="card-img" *ngIf="c.part_b.nom_fichier.includes('Sev')"  src="assets/GIFS_SEV/{{c.part_b.nom_fichier}}" ></ion-img>
+                  <ion-img (click)="zoomPhoto('assets/GIFS_ANDRE/' + c.part_b.nom_fichier)" class="card-img" *ngIf="c.part_b.nom_fichier.includes('Andre')"  src="assets/GIFS_ANDRE/{{c.part_b.nom_fichier}}"  ></ion-img>
+                </div>
+                <img (click)="zoomPhoto('assets/course.jpg')" *ngIf="c.part_b.nom_exo == 'course'"  id="imageGIF" src="assets/course.jpg" alt="" />
+                <img (click)="zoomPhoto(c.part_b.image)" *ngIf='c.part_b.image' [src]="domSanitizer.bypassSecurityTrustUrl(c.part_b.image)" alt="" />
+                <!-- <ion-img
+                role="button"
+                class="card-img"
+                src="assets/exo/Ex13_Sev.gif"
+                (click)="zoomPhoto('assets/exo/Ex13_Sev.gif')">
+                </ion-img> -->
+              </ion-col>
+              <!-- NOM EXO -->
+              <ion-col *ngIf="c.part_b.type === 'exercice'" id="vertical-align"  size="4">
+                {{c.part_b.nom_exo}}
+              </ion-col>          
+              <!-- DUREE OU NB REP OU DISTANCE -->
+              <ion-col id="vertical-align"  [size]="c.part_b.image === null ? 12 : 3">
+                <div id="center-div">
+                  {{c.part_b.temps_formatted}}
+                </div>
+
+              </ion-col> 
+
+            </ion-row>
+
+          </ion-col>
+ 
+        </ion-row>
+      </ion-card>
+
+
+
+      <!-- <ion-card class="outside-card" >
+        <ion-card-header class='ion-text-center'>
+          <ion-card-subtitle> PARTIE {{i+1}}</ion-card-subtitle>
+          <ion-card-subtitle>Réaliser {{c.nb_serie}} tours du circuit suivant :</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card class="inside-card" *ngIf="c.part_a">
+          <ion-card-header *ngIf="c.part_a.type == 'exercice'" style="background-color:rgb(55, 124, 228)" class="ion-text-center">
+            <ion-card-subtitle>{{c.part_a.type}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-header *ngIf="c.part_a.type == 'récupération'" style="background-color:#ed5565" class="ion-text-center">
+            <ion-card-subtitle>{{c.part_a.type}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class='card-content'>
+            <ion-img
+            role="button"
+            class="card-img"
+            src="assets/exo/photo_carre.png">
+            </ion-img>
+            <ion-row>
+              <ion-col size="6">
+                {{c.part_a.nom_exo}}
+              </ion-col>
+              <ion-col *ngIf="c.part_a.temps != '00:00:00'" size="6">
+                {{c.part_a.temps_formatted}}
+              </ion-col>
+              <ion-col *ngIf="c.part_a.nb_rep > 0" size="6">
+                {{c.part_a.nb_rep}} répétitions
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+
+        </ion-card>
+
+        <ion-card class="inside-card" *ngIf="c.part_b">
+          <ion-card-header *ngIf="c.part_b.type == 'exercice'" style="background-color:rgb(55, 124, 228)" class="ion-text-center">
+            <ion-card-subtitle>{{c.part_b.type}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-header *ngIf="c.part_b.type == 'récupération'" style="background-color:#ed5565" class="ion-text-center">
+            <ion-card-subtitle>{{c.part_b.type}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class='card-content'>
+            <ion-img
+            role="button"
+            class="card-img"
+            src="assets/exo/photo_carre.png">
+            </ion-img>
+
+            <ion-row>
+              <ion-col size="6">
+                {{c.part_b.nom_exo}}
+              </ion-col>
+              <ion-col *ngIf="c.part_a.temps != '00:00:00'" size="6">
+                {{c.part_b.temps_formatted}}
+              </ion-col>
+              <ion-col *ngIf="c.part_a.nb_rep > 0" size="6">
+                {{c.part_b.nb_rep}} répétitions
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+  
+        </ion-card>
+  
+      </ion-card> -->
+
+    </ng-container>
+
+
+
+  </div>
+
+
+
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Séances"></ion-back-button>
+    </ion-buttons>
+    <ion-title>panier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item  *ngFor="let seance of user_seance ">
+    <ion-label>
+{{seance.id_seance}} - {{seance.nom_seance}}
+    </ion-label>
+    <ion-button color="warning" (click)="goToDetail(seance)">Visualiser le bloc</ion-button>
+  </ion-item>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-button (click)="goToDoSeance()" class="add">
+        Faire la séance
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button  class="add">
+        Enregistrer la séance pour plus tard
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

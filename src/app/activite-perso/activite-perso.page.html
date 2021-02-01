@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Mon actitivé physique</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div style="text-align: center; display: block;">
+
+      <ion-list>
+        <ion-list-header>
+          <ion-label  id="sous_sous_titre">
+            <b>Date de l'activité  </b> 
+            <input  placeholder="cliquez" class="input-date" matInput [matDatepicker]="picker" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+              <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker (opened)="openDate()" (closed)="closeDate()" #picker></mat-datepicker>
+          </ion-label>
+        </ion-list-header>
+    </ion-list>
+
+  </div>
+
+    <!-- <ion-item lines="none" class='ion-text-center' >
+      <ion-label>
+      </ion-label>
+    </ion-item> -->
+  <!-- #docregion toggle -->
+
+
+  <!-- #enddocregion toggle -->
+
+
+  <div [class.dateOpen]="open"  >
+
+    <!-- <ion-item>
+      <ion-label><b>Début</b></ion-label>
+      <ion-datetime doneText="OK" cancelText="Annuler" i18n displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="newEvent.startTime" name="newEvent.startTime" ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Fin</b></ion-label>
+      <ion-datetime doneText="OK" cancelText="Annuler" displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="newEvent.endTime" name="newEvent.endTime"></ion-datetime>
+    </ion-item> -->
+
+    <ion-list  *ngFor='let question of questions'>
+      <ion-list-header  >
+        
+        <ion-label  class='ion-text-center'>
+          <b>{{question.text}}</b>
+        </ion-label>
+
+        <ion-button *ngIf="question.type == 'temps'"  (click)="chooseTime(question)">
+          <ion-icon color="secondary" name="chevron-down-outline"></ion-icon>
+        </ion-button>
+      </ion-list-header>
+
+      <!-- <ng-container *ngIf="question.type == 'datetime'">
+        <ionic-calendar-date-picker [toDate]="maxDate" (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>
+
+
+      </ng-container> -->
+
+
+    
+      <ng-container *ngIf="question.type == 'singleChoice'" >
+
+        <ion-item>
+          <ion-label></ion-label>
+          <ion-select [(ngModel)]="question.answer" color="secondary"  >
+            <ng-container *ngFor="let item of question.items">
+              <ion-select-option *ngIf='question.id != 2'  value="{{item.text}}">{{item.text}}</ion-select-option>
+              <ion-select-option *ngIf='question.id == 2'  value="{{item.value}}">{{item.text}}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+        
+        <!-- <ion-radio-group
+        (ionChange)="SelectedType($event)"
+        [(ngModel)]="question.answer"
+        name="question.answer"
+        >
+          <ion-item *ngFor='let item of question.items'>
+            <ion-label style="margin-right: 10px;">{{item.text}}</ion-label>
+            <ion-radio mode='md'  value={{item.text}}></ion-radio>
+            <ion-input *ngIf="item.text == 'Autre'" type="{{item.other.type}}" placeholder="{{item.other.placeholder}}" required=true style="z-index: 1000;" [(ngModel)]="item.other.answer" name="item.other.answer"></ion-input>
+          </ion-item>
+      
+      
+        </ion-radio-group> -->
+      </ng-container>
+
+      <ng-container *ngIf="question.type == 'rating'" >
+        
+        <h4 style="font-style:italic; text-align:center; display:block" text-center>{{question.subtitle}}</h4>
+        <ion-item  >
+          <ion-range mode='md'  min="{{question.min}}" max="{{question.max}}" step="{{question.step}}"  color="secondary" pin="true"  [(ngModel)]="question.answer" name="question.answer">
+            <ion-label slot="start">{{question.precisionMin}}</ion-label>
+            <ion-label slot="end">{{question.precisionMax}}</ion-label>
+          </ion-range>
+        </ion-item>
+      </ng-container>
+
+      <ng-container *ngIf="question.type == 'temps'" >
+        <ion-item lines="none" class="ion-text-center">
+          <ion-label class="ion-text-center">{{selected[0].h}}:{{selected[0].mn}} </ion-label>
+        </ion-item>
+  
+      </ng-container>
+
+      <ng-container *ngIf="question.type == 'singleInput'" >
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-input [(ngModel)]="question.answer" name="question.answer" type="{{question.type}}" placeholder={{question.placeholder}}></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ng-container>
+
+      <ng-container *ngIf="question.type == 'commentaire'">
+        <ion-card >
+          <ion-card-subtitle id="questionCom">{{question.questionCom}}</ion-card-subtitle>
+          <ion-card-content>
+              <ion-textarea [(ngModel)]="question.answer" placeholder="Écris ici ..."></ion-textarea>
+          </ion-card-content>
+      </ion-card>
+      </ng-container>
+  
+
+    </ion-list>
+
+
+
+
+    <ion-button (click)="onValidate()"   color="secondary" expand="block">Valider</ion-button>
+  </div>
+
+</ion-content>

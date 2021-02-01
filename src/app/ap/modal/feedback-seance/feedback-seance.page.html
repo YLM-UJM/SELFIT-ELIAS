@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>FEEDBACK DU BLOC N° {{infoSeance.id_bloc}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row style="margin-top:10px; margin-bottom:10px">
+    <div class="center">
+      <b>Avez-vous réussi à faire les exercices correctement ?</b> 
+    </div>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="1">
+
+    </ion-col>
+    <ion-col class="ion-text-center" size="1" *ngFor="let e of eval">
+      <div id="label-matos"  [ngClass]="{'selected': e.text === feedback.qualite, 'center':e.text != feedback.qualite }" (click)="selectValue('qualite', e.text)">
+        {{e.text}}
+      </div>
+    </ion-col>
+    <ion-col size="1">
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3">
+      NON
+    </ion-col>
+    <ion-col size="6">
+
+    </ion-col>
+    <ion-col style="text-align:right; padding-right:10px" size="3">
+      OUI
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row style="margin-top:10px; margin-bottom:10px">
+    <div class="center">
+      <b>Difficulté de ce bloc ?</b> 
+    </div>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="1">
+
+    </ion-col>
+    <ion-col class="ion-text-center" size="1" *ngFor="let e of eval">
+      <div id="label-matos"  [ngClass]="{'selected': e.text === feedback.difficulte, 'center':e.text != feedback.difficulte }" (click)="selectValue('difficulte', e.text)">
+        {{e.text}}
+      </div>
+    </ion-col>
+    <ion-col size="1">
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="3">
+      Très facile
+    </ion-col>
+    <ion-col size="6">
+
+    </ion-col>
+    <ion-col size="3">
+      Très difficile
+    </ion-col>
+  </ion-row>
+
+  <ion-button (click)="validateSeance()">
+    VALIDER
+  </ion-button>
+
+</ion-content>

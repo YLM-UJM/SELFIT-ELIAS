@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Paramètres"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card style="height: 200px">
+    <ion-card-subtitle class="ion-text-center" style="margin-bottom: 5px;">
+      Selectionnez ce dont vous disposez chez vous.
+    </ion-card-subtitle>
+      <div *ngFor='let mat of materiel' class="card-matos" (click)="getMatos(mat)">
+          <div id="label-matos" [class.selected]="mat.picked">{{mat.nom_materiel}}</div>
+      </div>
+
+  </ion-card>
+
+  <ion-button (click)="sendMateriel()">
+    Valider
+  </ion-button>
+
+  <div style="margin: 10px">
+    <sup>*</sup> Ces renseignements nous permettent de vous proposer des séances d'entrainement avec ce dont vous disposez chez vous.
+  </div>
+
+</ion-content>

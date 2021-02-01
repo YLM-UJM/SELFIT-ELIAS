@@ -1,0 +1,87 @@
+<ion-header mode="ios" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+    <b *ngIf="displayPoint" style="float:right">{{point_user}} points / {{point_possible }} possibles</b>
+    <ion-buttons (click)="goToPanier(selected_seance)" style="margin-right:5px; margin-top:5px" slot="end" >
+      <ion-icon size="large" color="secondary" slot="end" name="basket-outline"></ion-icon>
+      <ion-badge color="light"  style="position: absolute; right: -6px; top: -4px;">{{selected_seance.length}}</ion-badge>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+
+
+</ion-header>
+
+<ion-content>
+
+  <ion-row class="center-externe">
+    <ion-col size="8">
+      <div *ngIf="nb_bloc == 1" class="center-interne" >
+        Choisissez {{nb_bloc}} bloc
+      </div>
+      <div *ngIf="nb_bloc > 1" class="center-interne" >
+        Choisissez {{nb_bloc}} blocs
+      </div>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button (click)="changeDuration()">
+        Changer durée
+      </ion-button>
+    </ion-col>
+
+  </ion-row>
+
+
+
+
+    <ion-list>
+      <ion-card style="margin:2px; border-radius:5px" *ngFor="let seance of SEANCE">
+        <ion-row style="height:100%">
+          <ion-col size="1">
+            <ion-checkbox id="vertical-align"  mode='ios'  (click)="addToSelection(seance)" style="margin-right:5px" ></ion-checkbox>
+          </ion-col>
+
+          <ion-col size="11">
+            <ion-row>
+              <ion-col size="2">
+                <ion-row><h6>Force</h6></ion-row>
+                <ion-row><h6>Endurance</h6></ion-row>
+                <ion-row><h6>Equilibre</h6></ion-row>
+              </ion-col>
+              <ion-col size="5">
+                <ion-row id="bar" [style.width]="seance.score_force + '%' " style="background-color:rgb(213, 224, 48); color:transparent ">force</ion-row>
+                <ion-row id="bar" [style.width]="seance.score_endurance + '%' " style="background-color:rgb(86, 86, 170); color:transparent">endurance</ion-row>
+                <ion-row id="bar" [style.width]="seance.score_agilite + '%' " style="background-color:rgb(160, 121, 127); color:transparent">equilibre</ion-row>
+              </ion-col>
+              <ion-col  size="4">
+
+                  <ion-row class="center"> 
+                    <b>{{seance.score}}</b>
+                  </ion-row>
+                  <ion-row class="center">
+                    <b>POINTS</b>
+                  </ion-row>
+                  <ion-row class="center">
+                    <b>ID : {{seance.id_seance}}</b>
+                  </ion-row>
+
+              </ion-col>
+              <ion-col size="1">
+                <ion-icon (click)="getBlocInfo(seance)" style="font-size:24px" id="vertical-align"  name="information-circle-outline"></ion-icon>
+              </ion-col>
+            </ion-row>
+
+          </ion-col>
+
+        </ion-row>
+
+
+
+      </ion-card>
+    </ion-list>
+
+</ion-content>

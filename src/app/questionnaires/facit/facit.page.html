@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>facit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="texte">
+    Vous trouverez ci-dessous une liste de commentaires que d’autres personnes atteintes de la même maladie que vous ont jugés importants. Veuillez indiquer votre réponse en cochant un seul chiffre par ligne et en tenant compte des 7 derniers jours.
+  </div>
+  <app-survey [json]="json" (submitSurvey)="sendData($event)"></app-survey>
+
+</ion-content>

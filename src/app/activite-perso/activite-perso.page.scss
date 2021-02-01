@@ -1,0 +1,27 @@
+.input-date{
+    width: 0px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+
+ ion-range{
+     padding-top:5px;
+ }
+
+ .dateOpen{
+     margin-top:320px;
+ }
+
+ ion-button{
+     width:70%;
+     margin-left:15%
+ }
+
+ ion-list-header{
+     padding:0
+ }

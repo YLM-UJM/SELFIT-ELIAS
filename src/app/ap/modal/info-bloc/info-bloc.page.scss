@@ -1,0 +1,111 @@
+#imageGIF{
+    max-width: 50%;
+    margin-left: 25%;
+    margin-top:5px;
+}
+
+
+
+ion-card-header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+ion-card-subtitle{
+    color: black
+}
+
+#bar{
+    border-top-right-radius: 9px 9px;
+    border-bottom-right-radius: 9px 9px;
+}
+
+.center{
+display:block;
+text-align:center;
+}
+
+#center-div{
+    text-align: center;
+    width:100%
+}
+
+h6{
+    font-size:10px;
+    margin-bottom:0px;
+}
+
+h1{
+    font-size:14px;
+}
+
+.inside-card{
+    width:100%;
+    //margin-left: 10%
+    margin-left: 4px;
+    margin-right: 4px;
+    border-radius: 15px;
+}
+
+.outside-card{
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid rgb(192, 176, 176);
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+ }
+
+ .card-content{
+     padding:0
+ }
+
+ #vertical-align{
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+}
+
+ion-col{
+    padding:2px
+}
+
+.exercice{
+    background-color:rgb(55, 124, 228);
+    color: white;
+    text-transform: capitalize;
+    border-radius:10px;
+    font-weight: bold;
+}
+
+.recup{
+    background-color: #ed5565;
+    color: white;
+    text-transform: capitalize;
+    border-radius:10px;
+    font-weight: bold;
+}
+
+#badge-etape{
+    margin-top:5px;
+}
+
+#badge-nb_serie{
+    padding-left: 4px;
+    margin-left: 40px;
+}
+
+.center-externe{
+    height:100%;
+    width:100%;
+    display:table;
+}
+
+.center-interne{
+    display: table-cell; 
+    vertical-align: middle; 
+    text-align: center; 
+}

@@ -1,0 +1,51 @@
+<ion-header>
+  <!-- <ion-toolbar>
+    <ion-title>get-duration</ion-title>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+
+          <!-- ------ TEMPS DISPO ------  -->
+          <ion-card style="height: 290px; background-color:white;">
+            <ion-card-subtitle class="ion-text-center" style="margin-bottom: 5px; margin-top:5px">
+              Selectionnez votre temps d'entrainement
+            </ion-card-subtitle>
+              <div *ngFor='let tps of temps' class="card-tps" (click)="getTemps(tps)">
+                  <div id="label-temps" [class.selected]="tps.value == temps_selected">{{tps.text}}</div>
+              </div>
+              <div style="border-top: 1px solid grey; width: 80%; margin-left:10%; margin-top: 10px; margin-bottom: 10px;"></div>
+  
+              <ion-row>
+                  <ion-col [class.selected_type]="selected_type == 'libre'" (click)="selectType('libre')" size="6">
+                    <h3 class="titre-choix">LIBRE</h3>
+                    <h4 *ngIf="nb_bloc == 1" class="titre-choix">Je choisis {{nb_bloc}} bloc ci-dessous.</h4>
+                    <h4 *ngIf="nb_bloc > 1" class="titre-choix">Je choisis {{nb_bloc}} blocs ci-dessous.</h4>
+                  </ion-col>
+                  <ion-col [class.selected_type]="selected_type == 'auto'" class="titre-choix" (click)="selectType('auto')" size="6">
+                    <h3 class="titre-choix">AUTOMATIQUE</h3>
+                    <h4 class="titre-choix">Je laisse l'application créer la séance pour moi.</h4>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                <div style="border-top: 1px solid grey; width: 80%; margin-left:10%; margin-top: 10px; margin-bottom: 10px;"></div>
+              </ion-row>
+  
+            </ion-card>
+
+            <ion-row>
+              <ion-col   size="6">
+                <ion-button color="secondary">
+                  Faire une séance sauvegardée
+                </ion-button>
+              </ion-col>
+              <ion-col (click)="validate()" size="6">
+                <ion-button>
+                  VALIDER
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+
+
+</ion-content>

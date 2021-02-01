@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>isi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="texte">
+    Pour chacune des questions, veuillez cocher la case correspondant à votre réponse.
+  </div>
+  <app-survey [json]="json" (submitSurvey)="sendData($event)"></app-survey>
+
+</ion-content>
